@@ -8,7 +8,7 @@ import config_function,param_process,http_testing,time
 class sqlinj_testing:
     def __init__(self):
         self.config=config_function.config_function()
-        self.param_process=param_process.param_process(["'aNd sLEEp(5)|'a"," aNd sLEEp(5) "])
+        self.param_process=param_process.param_process(["'or sLEEp(5)|'a"," aNd sLEEp(5) "])
         self.http_testing=http_testing.http_testing()
     def run(self):
         for target_list in self.param_process.main(self.config.callback_target()):

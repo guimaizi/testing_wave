@@ -5,7 +5,8 @@ Created on Nov 14, 2019
 @author: guimaizi
 '''
 from urllib import parse
-import config_function,copy
+import config_function,copy,ast,json
+
 class param_process:
     def __init__(self,payload_list):
         self.config=config_function.config_function()
@@ -31,8 +32,38 @@ class param_process:
             print(e)
             return []
 
-    def json_process(self):
-        pass
+    def json_process(self,param):
+        try:
+            list_data=[]
+            #print(data)
+            json_str = json.dumps(param, sort_keys=True)
+            # 将 JSON 对象转换为 Python 字典
+            params_json = json.loads(json_str)
+            items = params_json.items()
+            for key, value in items:
+                if type(value)==type('str'):
+                    copy_data=copy.deepcopy(param)
+                    list_param_payload=[]
+                    for payload in self.payload_list:
+                        copy_data[key]=copy_data[key]+payload
+                        list_param_payload.append({"name_param":"%s"%key,"param":copy_data})
+                    list_data.append(list_param_payload)
+            return list_data
+        except Exception as e:
+            print(e)
+            return []
+    def callback_json_param(self,data):
+            list_data=[]
+            for param_list in self.param_process(data['post']):
+                list_param_payload=[]
+                for param in param_list:
+                    data['post']=param['param']
+                    #print(data['post'])
+                    real_data={"name_param":param['name_param'],"data":data}
+                    copy_data=copy.deepcopy(real_data)
+                    list_param_payload.append(copy_data)
+                list_data.append(list_param_payload)
+            return list_data
     def callback_get_param(self,data):
         list_data=[]
         url_tmp=parse.urlparse(data['url'])
@@ -72,11 +103,7 @@ class param_process:
             list_data.extend(self.callback_get_param(data))
         return list_data
 if __name__ == '__main__':
-    p1=param_process()
     payload_list=['XSSGUIMAIZI','SQLINJ']
-    for i in p1.main(payload_list):
-        print(i)
-        
-    #param='dada=adada&dasda@d=1&fsdfs=111&23131=dasda&FDSF='
-    #p1.param_process(param,payload_list)
-    #print(p1.url_process(url, payload))
+    p1=param_process(payload_list)
+    tmp1={'aaaa':'AASDSAdasdas',"cccc":"asdsadasdsa","dsadsa":1111,"sadasdas":"dsadasdsa"}
+    print(p1.json_process(tmp1))
