@@ -13,7 +13,7 @@ class config_function:
         self.time_out=10
         
     def callback_target(self):
-        with open('/Users/guimaizi/hack-tool/burp_lib/tmp.json', 'r') as f:
+        with open('G:/Code/testing_wave/tmp.json', 'r') as f:
             data = json.load(f)
         return data
     def show_text(self):
