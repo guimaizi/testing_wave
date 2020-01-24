@@ -12,7 +12,7 @@ class waf_test:
     def run(self):
         data=self.config.callback_target()
         data['url']=data['url']+'<img src=a onerror=alert()>'
-        if '501page.html' in self.http_testing.callback_response(data):
+        if '501page.html' in self.http_testing.callback_response(data) or '501 Not Implemented' in self.http_testing.callback_response(data):
             print('have waf...')
             return 0
 if __name__ == '__main__':
