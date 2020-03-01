@@ -15,11 +15,12 @@ class sqlinj_testing:
             #print(target_list)
             for target in target_list:
                 start = time.time()
-                #print(target['data'])
+                #print(target)
                 response=self.http_testing.callback_response(target['data'])
                 end = time.time()
                 if end-start>4 or 'Truncated incorrect DOUBLE value' in response:
                     print('sqlinj : %s\n%s'%(target['name_param'],target['data']))
+                    time.sleep(3)
 if __name__ == '__main__':
     p1=sqlinj_testing()
     p1.run()

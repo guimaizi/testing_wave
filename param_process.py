@@ -13,25 +13,6 @@ class param_process:
         self.payload_list=payload_list
     def url_process(self,url):
         print(url)
-
-    def param_process(self,param):
-        try:
-            num=0
-            callback_param=[]
-            for tmp in param.split('&'):
-                param_tuple=[]
-                for payload in self.payload_list:
-                    tmp_param=param.split('&')
-                    param_name=tmp_param[num].split('=')[0]
-                    tmp_param[num]=tmp_param[num]+payload
-                    param_tuple.append({"name_param":"%s"%param_name,"param":'&'.join(tmp_param)})
-                callback_param.append(param_tuple)
-                num=num+1
-            return callback_param
-        except Exception as e:
-            print(e)
-            return []
-
     def json_process(self,param):
         try:
             list_data=[]
@@ -64,17 +45,38 @@ class param_process:
                     list_param_payload.append(copy_data)
                 list_data.append(list_param_payload)
             return list_data
+    def param_process(self,param):
+        try:
+            num=0
+            callback_param=[]
+            for tmp in param.split('&'):
+                param_tuple=[]
+                for payload in self.payload_list:
+                    tmp_param=param.split('&')
+                    param_name=tmp_param[num].split('=')[0]
+                    tmp_param[num]=tmp_param[num]+payload
+                    #param_tuple.append({"name_param":"%s"%param_name,"param":'&'.join(tmp_param)})
+                    param_tuple.append({"param":'&'.join(tmp_param)})
+                param_tmp={"name_param":"%s"%param_name,"data":param_tuple}
+                callback_param.append(param_tmp)
+                num=num+1
+            return callback_param
+        except Exception as e:
+            print(e)
+            return []
     def callback_get_param(self,data):
         list_data=[]
         url_tmp=parse.urlparse(data['url'])
         if '=' in url_tmp.query:
             for param_list in self.param_process(url_tmp.query):
                 list_param_payload=[]
-                for param in param_list:
+                for param in param_list['data']:
+                    #print(param)
                     url=data['url']
                     url_frist=url.split('?')[0]
                     data['url']=url_frist+'?'+param['param']
-                    real_data={"name_param":param['name_param'],"data":data}
+                    #print(data['url'])
+                    real_data={"name_param":param_list['name_param'],"data":data}
                     copy_data=copy.deepcopy(real_data)
                     list_param_payload.append(copy_data)
                 list_data.append(list_param_payload)
@@ -83,10 +85,10 @@ class param_process:
         list_data=[]
         for param_list in self.param_process(data['post']):
             list_param_payload=[]
-            for param in param_list:
+            for param in param_list['data']:
                 data['post']=param['param']
                 #print(data['post'])
-                real_data={"name_param":param['name_param'],"data":data}
+                real_data={"name_param":param_list['name_param'],"data":data}
                 copy_data=copy.deepcopy(real_data)
                 list_param_payload.append(copy_data)
             list_data.append(list_param_payload)
@@ -105,5 +107,9 @@ class param_process:
 if __name__ == '__main__':
     payload_list=['XSSGUIMAIZI','SQLINJ']
     p1=param_process(payload_list)
-    tmp1={'aaaa':'AASDSAdasdas',"cccc":"asdsadasdsa","dsadsa":1111,"sadasdas":"dsadasdsa"}
-    print(p1.json_process(tmp1))
+    #tmp1={'aaaa':'AASDSAdasdas',"cccc":"asdsadasdsa","dsadsa":1111,"sadasdas":"dsadasdsa"}
+    #print(p1.json_process(tmp1))
+    tmp='tmp=aaaa&tmp1=bbbb&tmp2=ccccc'
+    print(p1.param_process(tmp))
+    for tmp in p1.param_process(tmp):
+        print(tmp)
