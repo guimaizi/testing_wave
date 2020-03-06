@@ -12,7 +12,7 @@ class sqlinj_testing:
         self.http_testing=http_testing.http_testing()
     def run(self):
         for target_list in self.param_process.main(self.config.callback_target()):
-            #print(target_list)
+            print(target_list)
             for target in target_list:
                 start = time.time()
                 #print(target)

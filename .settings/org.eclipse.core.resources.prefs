@@ -1,6 +1,6 @@
 eclipse.preferences.version=1
+encoding//attack_plugin/cmd_inj.py=utf-8
 encoding//attack_plugin/sqlinj_testing.py=utf-8
-encoding//attack_plugin/vul_blind_testing.py=utf-8
 encoding//attack_plugin/waf_test.py=utf-8
 encoding//attack_plugin/xss_testing.py=utf-8
 encoding/burp_vul_plugin.py=utf-8

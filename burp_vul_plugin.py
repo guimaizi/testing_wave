@@ -45,9 +45,10 @@ class BurpExtender(IBurpExtender,  IContextMenuFactory):
         else:body='null'
         path=r"G:/Code/testing_wave"
         test_vul = "%s/main.py"%path        
-        data={"method":method,"url":str(url),"post":str(body),"headers":json_strs}
+        data={"method":method,"url":str(url),"post":body,"headers":json_strs}
         json_data=json.dumps(data)
         print json_data
+        print 3333
         with open('%s/tmp.json'%path, 'w') as json_file:
             json_file.write(json_data)
         #subprocess.call('python3 /Users/guimaizi/hack-tool/burp_lib/test_vul.py')

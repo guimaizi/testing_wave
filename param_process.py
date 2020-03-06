@@ -16,35 +16,32 @@ class param_process:
     def json_process(self,param):
         try:
             list_data=[]
-            #print(data)
-            json_str = json.dumps(param, sort_keys=True)
-            # 将 JSON 对象转换为 Python 字典
-            params_json = json.loads(json_str)
-            items = params_json.items()
-            for key, value in items:
-                if type(value)==type('str'):
-                    copy_data=copy.deepcopy(param)
-                    list_param_payload=[]
+            items=eval(param)
+            for value in items:
+                list_param_payload=[]
+                if type(items[value])==type('str') or type(items[value])==type(1):
                     for payload in self.payload_list:
-                        copy_data[key]=copy_data[key]+payload
-                        list_param_payload.append({"name_param":"%s"%key,"param":copy_data})
-                    list_data.append(list_param_payload)
+                        copy_data=copy.deepcopy(items)
+                        copy_data[value]=str(copy_data[value])+payload
+                        list_param_payload.append(copy_data)
+                    list_data.append({"name_param":"%s"%value,"data":list_param_payload})
             return list_data
         except Exception as e:
             print(e)
             return []
     def callback_json_param(self,data):
-            list_data=[]
-            for param_list in self.param_process(data['post']):
-                list_param_payload=[]
-                for param in param_list:
-                    data['post']=param['param']
-                    #print(data['post'])
-                    real_data={"name_param":param['name_param'],"data":data}
-                    copy_data=copy.deepcopy(real_data)
-                    list_param_payload.append(copy_data)
-                list_data.append(list_param_payload)
-            return list_data
+        list_data=[]
+        for param_list in self.json_process(data['post']):
+            #print(param_list)
+            list_param_payload=[]
+            for param in param_list['data']:
+                #print(param)
+                data['post']=param
+                real_data={"name_param":param_list['name_param'],"data":data}
+                copy_data=copy.deepcopy(real_data)
+                list_param_payload.append(copy_data)
+            list_data.append(list_param_payload)
+        return list_data
     def param_process(self,param):
         try:
             num=0
@@ -94,13 +91,30 @@ class param_process:
             list_data.append(list_param_payload)
         return list_data
     def main(self,data):
+        '''result:
+        ###常规参数：
+        [{'name_param': 'tmp', 'data': [
+        {'param': 'tmp=aaaaXSSGUIMAIZI&tmp1=bbbb&tmp2=ccccc'}, 
+        {'param': 'tmp=aaaaSQLINJ&tmp1=bbbb&tmp2=ccccc'}]},
+         {'name_param': 'tmp1', 'data': [
+         {'param': 'tmp=aaaa&tmp1=bbbbXSSGUIMAIZI&tmp2=ccccc'},
+          {'param': 'tmp=aaaa&tmp1=bbbbSQLINJ&tmp2=ccccc'}]},
+           {'name_param': 'tmp2', 'data': [
+           {'param': 'tmp=aaaa&tmp1=bbbb&tmp2=cccccXSSGUIMAIZI'}, 
+           {'param': 'tmp=aaaa&tmp1=bbbb&tmp2=cccccSQLINJ'}]}]
+        '''
         list_data=[]
         copy_data=copy.deepcopy(data)
         if data['method']==1:
             url_tmp=parse.urlparse(data['url'])
             if '=' in url_tmp.query:
                 list_data.extend(self.callback_get_param(data))
-            list_data.extend(self.callback_post_param(copy_data))
+            try:
+                #print(copy_data)
+                eval(copy_data['post'])
+                list_data.extend(self.callback_json_param(copy_data))
+            except:
+                list_data.extend(self.callback_post_param(copy_data))
         elif data['method']==0:
             list_data.extend(self.callback_get_param(data))
         return list_data
