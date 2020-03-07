@@ -30,6 +30,8 @@ class config_function:
         te.insert('end', 'xsssssss')
         te.update()
         root.mainloop()
+    def Generated_text(self,data):
+        print(data)
 if __name__ == '__main__':
     url='http://www.target.cn/zxft/20483.htm?dsdsa=dsadsa&dada=1&dsdada=3fdsf'
     payload='xsssguimaizi'

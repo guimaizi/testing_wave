@@ -4,7 +4,7 @@ Created on Nov 25, 2019
 
 @author: guimaizi
 '''
-from attack_plugin import  xss_testing,sqlinj_testing,waf_test
+from attack_plugin import  xss_testing,sqlinj_testing,waf_test,cmd_inj
 class main:
     def __init__(self):
         print('--------------------------\n\n')
@@ -13,10 +13,12 @@ class main:
     def main(self):
         waf=waf_test.waf_test()
         if waf.run()!=0:
-            xss=xss_testing.xss_testing()
-            xss.run()
-            sql=sqlinj_testing.sqlinj_testing()
-            sql.run()
+            cmd_in=cmd_inj.cmd_inj()
+            cmd_in.run()
+            sql_inj=sqlinj_testing.sqlinj_testing()
+            sql_inj.run()
+        xss=xss_testing.xss_testing()
+        xss.run()
         print('\n-------------\nfinished')
 if __name__ == '__main__':
     p1=main()

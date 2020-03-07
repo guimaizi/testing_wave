@@ -7,6 +7,7 @@ Created on Nov 12, 2019
 import config_function,requests,json
 class http_testing:
     def __init__(self):
+        '''http/s重放发包'''
         self.config_param=config_function.config_function()
     def http_get(self,data):
         try:
@@ -16,11 +17,11 @@ class http_testing:
         except:return 'null'
     def http_post(self,data):
         try:
-            #print(data)
             proxies = { "http": "http://127.0.0.1:8080"}
-            try:
+            if type(data['post'])==type({'a':1}):
                 r=requests.post(data['url'],data=json.dumps(data['post']),proxies=proxies,headers=data['headers'],timeout=self.config_param.time_out)
-            except:r=requests.post(data['url'],data=data['post'],proxies=proxies,headers=data['headers'],timeout=self.config_param.time_out)
+            else:
+                r=requests.post(data['url'],data=str(data['post']),proxies=proxies,headers=data['headers'],timeout=self.config_param.time_out)
             r.close()
             #print(r.text)
             return r.text
