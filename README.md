@@ -1,26 +1,26 @@
-### ����
+### 介绍
 
-�þ�û�и����������ˣ������һ������������һ�����ӣ��������Һܴ�����һ��"web��ȫ��������©��ɨ����"����ȫ����Χ������������ʮ���web©��ɨ�����У��ҵ�ɨ������γ���? ������...����Ҳ���Ƕ�ô���ڣ�����������һ�߼�����Ա��һ��ʵս��web©���ھ�ѡ�־��ú�ʵ�ã���ʵ�ڣ�����������ڵġ�
+好久没有更技术文章了，今天更一个，算是造了一个轮子，花费了我很大精力，一个"web安全被动常规漏洞扫描器"，在全网范围内数万甚至数十万的web漏洞扫描器中，我的扫描器如何出众? 哈哈哈...可能也不是多么出众，但是我这种一线技术人员、一线实战派web漏洞挖掘选手觉得很实用，很实在，并不花里胡哨的。
 
-��Ȼ��web©��ɨ��������ô��Ҫ�����˽���ʲô��web©���ھ�˵���˾����޸�http/s����������ݡ�
+既然是web漏洞扫描器，那么就要基本了解下什么是web漏洞挖掘，说白了就是修改http/s请求包的数据。
 
 ![](https://raw.githubusercontent.com/guimaizi/cloud/test/img/20200307181557.png)
 
-��ͼ���ܱ�׵��һ��http�������Ҳ�Ǻܱ�׼��һ��xss©������ô�ж�xss�ķ�ʽ�����޸�name������ֵ��Ȼ���ж�http����Ӧ���ݣ�������ж�xss��©�����ڣ�ͨ�����ǻ��ֹ���name����׷��payload:
+如图，很标椎的一个http请求包，也是很标准的一个xss漏洞，那么判断xss的方式就是修改name参数的值，然后判断http的响应内容，如此来判断xss的漏洞存在，通常我们会手工在name参数追加payload:
 
 ```<img src=a onerror=alert(1)>```
 
-�ж���Ӧ�������ж����ǲ��Ǵ���һ��xss©��,����׷��' ��and 1=1��or 1=1��and sleep(3)���ж��Ƿ����sqlע��ȣ���������ĺ���ֵ���ÿ�ζ�����������ˮ���ˣ���ʤ�䷳����Ҳ�Ƿ��� �����ǺڿͰ�����Ȼ��ʼ����ˮ�߹����ˣ��ⲻ��ѧ��,̫ɵ����,��ô���ʱ�������Ҫ�����ɨ�����ˡ�
+判断响应内容来判断这是不是存在一个xss漏洞,或者追加' 、and 1=1、or 1=1、and sleep(3)来判断是否存在sql注入等，而且他妈的很奇怪的是每次都是这样，流水线了，不胜其烦，我也是服了 我们是黑客啊，居然开始干流水线工作了，这不科学啊,太傻逼了,那么这个时候你就需要我这个扫描器了。
 
-Ч����Ƶ: 
+效果视频: 
 
 <video src="https://github.com/guimaizi/cloud/raw/test/20200307-190212967.mp4"/>
 
-����get\post ���� Content-Type: application/json �����ɲ⡣
+常规get\post 包括 Content-Type: application/json 、均可测。
 
-˼·���ǰ�burp��http�����ץ��������Ϊtmp.json
+思路就是把burp的http请求包抓出来保存为tmp.json
 
-��ʽ:
+格式:
 
 ```{
 {"headers": 
@@ -59,25 +59,25 @@
 }
 ```
 
-Ȼ��ͨ���ű�������׷��payload�� ���в���©����
+然后通过脚本处理、追加payload后 进行测试漏洞。
 
-������ [mitmproxy](https://github.com/mitmproxy/mitmproxy)   ��ô���Ǹ����Ʊ�Դ����[xray](https://github.com/chaitin/xray) �ı���ɨ������������������һ��ǿ������棬�Ǿ��Ǹ�����ɨ������
+如果配合 [mitmproxy](https://github.com/mitmproxy/mitmproxy)   那么就是个类似闭源工具[xray](https://github.com/chaitin/xray) 的被动扫描器、如果你再配合上一个强大的爬虫，那就是个主动扫描器。
 
-������Դ��,����������,��û�����
+反正开源的,你随意折腾,我没意见。
 
 github: https://github.com/guimaizi/testing_wave
 
 
 
-��ô�õĹ��ߣ���û�д�ү����Ը������һ�뼦�ҳ� wechat֧��:
+这么好的工具，有没有大爷大妈愿意赏我一碗鸡煲翅 wechat支付:
 
 ![](https://raw.githubusercontent.com/guimaizi/cloud/test/img/20200307192617.png)
 
 
 
-����/����/������ǰ �������뼦�ҳ�....
+建议/反馈/问问题前 请先赏碗鸡煲翅....
 
-��ϵ��ʽWeChat : 
+联系方式WeChat : 
 
 ![](https://raw.githubusercontent.com/guimaizi/cloud/test/img/20200307193002.jpg)
 
