@@ -1,6 +1,7 @@
 # coding: utf-8
 '''
 @author: guimaizi
+: burp插件
 '''
 from burp import IBurpExtender
 from burp import IContextMenuFactory
@@ -43,13 +44,13 @@ class BurpExtender(IBurpExtender,  IContextMenuFactory):
             body = request.getRequest().tostring()[analyzedRequest.getBodyOffset():]
             method=1
         else:body='null'
-        path=r"G:/Code/testing_wave"
+        path=r"G:/Code/testing_wave/tmp/burp_tmp.json"
         test_vul = "%s/main.py"%path        
         data={"method":method,"url":str(url),"post":body,"headers":json_strs}
         json_data=json.dumps(data)
         print json_data
         print 3333
-        with open('%s/tmp.json'%path, 'w') as json_file:
+        with open('%s'%path, 'w') as json_file:
             json_file.write(json_data)
         #subprocess.call('python3 /Users/guimaizi/hack-tool/burp_lib/test_vul.py')
         #os.system('open -a Terminal.app /Users/guimaizi/eclipse-workspace/testing_wave/start.sh')

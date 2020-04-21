@@ -1,88 +1,14 @@
-### ÓĞ¸öĞ§¹ûÊÓÆµgithub markdown½âÎöÓĞÎÊÌâ¡¢Çë¿´Ô­ÎÄ:https://guimaizi.github.io/2020/03/07/scan-num-1/
-### ½éÉÜ
+### å·¥å…·ä»‹ç»
 
-ºÃ¾ÃÃ»ÓĞ¸ü¼¼ÊõÎÄÕÂÁË£¬½ñÌì¸üÒ»¸ö£¬ËãÊÇÔìÁËÒ»¸öÂÖ×Ó£¬»¨·ÑÁËÎÒºÜ´ó¾«Á¦£¬Ò»¸ö"web°²È«±»¶¯³£¹æÂ©¶´É¨ÃèÆ÷"£¬ÔÚÈ«Íø·¶Î§ÄÚÊıÍòÉõÖÁÊıÊ®ÍòµÄwebÂ©¶´É¨ÃèÆ÷ÖĞ£¬ÎÒµÄÉ¨ÃèÆ÷ÈçºÎ³öÖÚ? ¹ş¹ş¹ş...¿ÉÄÜÒ²²»ÊÇ¶àÃ´³öÖÚ£¬µ«ÊÇÎÒÕâÖÖÒ»Ïß¼¼ÊõÈËÔ±¡¢Ò»ÏßÊµÕ½ÅÉwebÂ©¶´ÍÚ¾òÑ¡ÊÖ¾õµÃºÜÊµÓÃ£¬ºÜÊµÔÚ£¬²¢²»»¨ÀïºúÉÚµÄ¡£
+ä¸ºäº†åœ¨æŒ–æ´ä¸­é™ä½å·¥ä½œé‡ï¼Œé¿å…é‡å¤å·¥ä½œï¼Œè¿›è€Œç ”å‘å‡ºè¯¥å¼€æºå·¥å…·ã€‚
 
-¼ÈÈ»ÊÇwebÂ©¶´É¨ÃèÆ÷£¬ÄÇÃ´¾ÍÒª»ù±¾ÁË½âÏÂÊ²Ã´ÊÇwebÂ©¶´ÍÚ¾ò£¬Ëµ°×ÁË¾ÍÊÇĞŞ¸Ähttp/sÇëÇó°üµÄÊı¾İ¡£
+### åŠŸèƒ½ä»‹ç»
 
-![](https://raw.githubusercontent.com/guimaizi/cloud/test/img/20200307181557.png)
+ä»£ç†æŠ“å–httpè¯·æ±‚åŒ…æŒ‰æ ¼å¼å…¥åº“ï¼Œé€šè¿‡pyè¯»å–æ•°æ®åº“å†…å®¹ï¼Œè¿½åŠ æˆ–è€…ä¿®æ”¹httpè¯·æ±‚å‚æ•°è¿›è¡Œæ¼æ´æµ‹è¯•ã€‚
 
-ÈçÍ¼£¬ºÜ±ê×µµÄÒ»¸öhttpÇëÇó°ü£¬Ò²ÊÇºÜ±ê×¼µÄÒ»¸öxssÂ©¶´£¬ÄÇÃ´ÅĞ¶ÏxssµÄ·½Ê½¾ÍÊÇĞŞ¸Äname²ÎÊıµÄÖµ£¬È»ºóÅĞ¶ÏhttpµÄÏìÓ¦ÄÚÈİ£¬Èç´ËÀ´ÅĞ¶ÏxssµÄÂ©¶´´æÔÚ£¬Í¨³£ÎÒÃÇ»áÊÖ¹¤ÔÚname²ÎÊı×·¼Ópayload:
+### å‚è€ƒ
 
-```<img src=a onerror=alert(1)>```
+https://github.com/mitmproxy/mitmproxy
 
-ÅĞ¶ÏÏìÓ¦ÄÚÈİÀ´ÅĞ¶ÏÕâÊÇ²»ÊÇ´æÔÚÒ»¸öxssÂ©¶´,»òÕß×·¼Ó' ¡¢and 1=1¡¢or 1=1¡¢and sleep(3)À´ÅĞ¶ÏÊÇ·ñ´æÔÚsql×¢ÈëµÈ£¬¶øÇÒËûÂèµÄºÜÆæ¹ÖµÄÊÇÃ¿´Î¶¼ÊÇÕâÑù£¬Á÷Ë®ÏßÁË£¬²»Ê¤Æä·³£¬ÎÒÒ²ÊÇ·şÁË ÎÒÃÇÊÇºÚ¿Í°¡£¬¾ÓÈ»¿ªÊ¼¸ÉÁ÷Ë®Ïß¹¤×÷ÁË£¬Õâ²»¿ÆÑ§°¡,Ì«Éµ±ÆÁË,ÄÇÃ´Õâ¸öÊ±ºòÄã¾ÍĞèÒªÎÒÕâ¸öÉ¨ÃèÆ÷ÁË¡£
-
-Ğ§¹ûÊÓÆµ: 
-{% dplayer "url=https://github.com/guimaizi/cloud/raw/test/20200307-190212967.mp4" "loop=yes" "theme=#FADFA3" "autoplay=false" "token=tokendemo" %}
-
-
-
-
-³£¹æget\post °üÀ¨ Content-Type: application/json ¡¢¾ù¿É²â¡£
-
-Ë¼Â·¾ÍÊÇ°ÑburpµÄhttpÇëÇó°ü×¥³öÀ´±£´æÎªtmp.json
-
-¸ñÊ½:
-
-```{
-{"headers": 
-    {
-        "Origin": "http://192.168.0.137",
-         "Cookie": "PHPSESSID=fjkq8kiuutn3hkoj4uppsg30da",
-         "Accept": "application/json,
-         text/javascript,
-         */*; q=0.01",
-         "X-Requested-With": "XMLHttpRequest",
-         "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML,
-         like Gecko) Chrome/81.0.4009.0 Safari/537.36",
-         "Referer": "http://192.168.0.137/12345.php",
-         "Connection": "close",
-         "Accept-Encoding": "gzip,
-         deflate",
-         "Accept-Language": "en-US,
-        en;q=0.9",
-         "Content-Length": "85",
-         "Content-Type": "application/json"
-    },
-     "method": 1,
-     "url": "http://192.168.0.137:80/12345.php",
-     "post": "
-    {
-        \"userName\":\"asdas\",
-        \"passWord\":\"dsadsa\",
-        \"type\":1,
-        \"data\":
-        {
-            \"aaaa\":\"bbbb\",
-            \"cccc\":11111
-        }
-    }
-    "
-}
-```
-
-È»ºóÍ¨¹ı½Å±¾´¦Àí¡¢×·¼Ópayloadºó ½øĞĞ²âÊÔÂ©¶´¡£
-
-Èç¹ûÅäºÏ [mitmproxy](https://github.com/mitmproxy/mitmproxy)   ÄÇÃ´¾ÍÊÇ¸öÀàËÆ±ÕÔ´¹¤¾ß[xray](https://github.com/chaitin/xray) µÄ±»¶¯É¨ÃèÆ÷¡¢Èç¹ûÄãÔÙÅäºÏÉÏÒ»¸öÇ¿´óµÄÅÀ³æ£¬ÄÇ¾ÍÊÇ¸öÖ÷¶¯É¨ÃèÆ÷¡£
-
-·´Õı¿ªÔ´µÄ,ÄãËæÒâÕÛÌÚ,ÎÒÃ»Òâ¼û¡£
-
-github: https://github.com/guimaizi/testing_wave
-
-
-
-ÕâÃ´ºÃµÄ¹¤¾ß£¬ÓĞÃ»ÓĞ´óÒ¯´óÂèÔ¸ÒâÉÍÎÒÒ»Íë¼¦ìÒ³á wechatÖ§¸¶:
-
-![](https://raw.githubusercontent.com/guimaizi/cloud/test/img/20200307192617.png)
-
-
-
-½¨Òé/·´À¡/ÎÊÎÊÌâÇ° ÇëÏÈÉÍÍë¼¦ìÒ³á....
-
-ÁªÏµ·½Ê½WeChat : 
-
-![](https://raw.githubusercontent.com/guimaizi/cloud/test/img/20200307193002.jpg)
-
-
+https://docs.mitmproxy.org/stable/
 

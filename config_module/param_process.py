@@ -5,14 +5,18 @@ Created on Nov 14, 2019
 @author: guimaizi
 '''
 from urllib import parse
-import config_function,copy,ast,json
+import copy,time
+from urllib.parse import urlparse
+from config_module import config_function,filter_similarity
+
 
 class param_process:
     def __init__(self,payload_list):
         '''
-        http请求包处理
+        : http请求包处理
         '''
-        self.config=config_function.config_function()
+        self.config= config_function.config_function()
+        self.filter=filter_similarity.filter_similarity()
         self.payload_list=payload_list
     def callback_json_process(self,items,value):
         list_param_payload=[]
@@ -22,6 +26,11 @@ class param_process:
             list_param_payload.append(copy_data)
         return list_param_payload
     def json_process(self,param):
+        '''
+        : {'a':1,'b':'str',c:{'a':1}}   json参数处理
+        :param param:
+        :return:
+        '''
         try:
             list_data=[]
             items=eval(param)
@@ -35,7 +44,7 @@ class param_process:
                             copy_data=copy.deepcopy(items)
                             copy_data[value]=data
                             list_data_first.append(copy_data)
-                        list_data.append({"name_param":"%s"%itmes_param,"data":list_data_first})
+                        list_data.append({"name_param":"%s.%s"%(value,itmes_param),"data":list_data_first})
             return list_data
         except Exception as e:
             print(e)
@@ -54,6 +63,11 @@ class param_process:
             list_data.append(list_param_payload)
         return list_data
     def param_process(self,param):
+        '''
+        : a=str&b=str&c=1  这类参数处理
+        :param param:
+        :return:
+        '''
         try:
             num=0
             callback_param=[]
@@ -63,7 +77,6 @@ class param_process:
                     tmp_param=param.split('&')
                     param_name=tmp_param[num].split('=')[0]
                     tmp_param[num]=tmp_param[num]+payload
-                    #param_tuple.append({"name_param":"%s"%param_name,"param":'&'.join(tmp_param)})
                     param_tuple.append({"param":'&'.join(tmp_param)})
                 param_tmp={"name_param":"%s"%param_name,"data":param_tuple}
                 callback_param.append(param_tmp)
@@ -112,7 +125,7 @@ class param_process:
                 list_data.extend(self.callback_post_param(copy_data))
         elif data['method']==0:
             list_data.extend(self.callback_get_param(data))
-        return list_data
+        return self.filter.filter_param(list_data)
 if __name__ == '__main__':
     payload_list=['XSSGUIMAIZI','SQLINJ']
     p1=param_process(payload_list)

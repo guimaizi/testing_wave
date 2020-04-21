@@ -4,12 +4,14 @@ Created on Dec 30, 2019
 
 @author: guimaizi
 '''
-import config_function,http_testing
+from config_module import http_testing, config_function
+
+
 class waf_test:
     def __init__(self):
         '''waf测试'''
-        self.config=config_function.config_function()
-        self.http_testing=http_testing.http_testing()
+        self.config= config_function.config_function()
+        self.http_testing= http_testing.http_testing()
     def dict_waf(self,data):
         for i in ['501page.html','501 Not Implemented','501 by TSW']:
             if i in data:
