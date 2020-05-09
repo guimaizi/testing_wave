@@ -2,7 +2,7 @@
 '''
     @Author guimaizi
     @Date 3/30/2020 14:00
-    mitmdump -s ./http_porxy.py
+    mitmdump -s ./http_porxy.py -p 8788
     powsershell   .\chrome.exe  --proxy-server="127.0.0.1:8788"
 '''
 from mitmproxy import http
@@ -12,7 +12,7 @@ import time,json,pymongo
 class AddHeader(object):
     def __init__(self):
         client = pymongo.MongoClient(host='192.168.0.137',port=27017)
-        self.db_target_domain = client['testing_wave']['main']
+        self.db_target_domain = client['testing_wave']['request_http_list']
         #db_target_domain.authenticate(config_main.callback_mongo_config()['name'], config_main.callback_mongo_config()['password'])
         #self.collection = self.db_target_domain['data_table_%s'%time.strftime('%Y-%m-%d',time.localtime()).replace('-','_')]
         #self.collection = self.db_target_domain.main
@@ -35,7 +35,7 @@ class AddHeader(object):
     def response(self,flow):
         if self.filter_http(flow)!=False:
             if flow.request.method=='GET':method=0
-            else:method=1
+            elif flow.request.method=='POST':method=1
             if flow.request.get_text()!='':
                 post=flow.request.get_text()
             else:post='null'

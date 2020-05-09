@@ -17,8 +17,8 @@ class waf_test:
             if i in data:
                 return False
         return True
-    def run(self):
-        data=self.config.callback_target()
+    def run(self,request_data):
+        data=request_data
         data['url']=data['url']+'<img src=a onerror=alert()>'
         if self.dict_waf(self.http_testing.callback_response(data))==False:
             self.config.Generated_text('have waf...')

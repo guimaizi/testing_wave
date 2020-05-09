@@ -124,8 +124,14 @@ class param_process:
             except:
                 list_data.extend(self.callback_post_param(copy_data))
         elif data['method']==0:
-            list_data.extend(self.callback_get_param(data))
-        return self.filter.filter_param(list_data)
+            if '?'  in data['url'] and '='  in data['url']:
+                list_data.extend(self.callback_get_param(data))
+            elif self.filter.null_param_filter(self.config.callback_url_header(data['url']))<1:
+                list_data.extend(data)
+            else:list_data.extend([])
+        if list_data!=[]:
+            return self.filter.filter_param(list_data)
+        else:return []
 if __name__ == '__main__':
     payload_list=['XSSGUIMAIZI','SQLINJ']
     p1=param_process(payload_list)

@@ -10,10 +10,11 @@ class sqlinj_testing:
     def __init__(self):
         '''注入测试'''
         self.config= config_function.config_function()
-        self.param_process= param_process.param_process(["'or sLEEp(5)|'a", " aNd sLEEp(5) "])
+        self.payload=["'or sLEEp(5)|'a", " aNd sLEEp(5) "]
+        self.param_process= param_process.param_process(self.payload)
         self.http_testing= http_testing.http_testing()
-    def run(self):
-        for target_list in self.param_process.main(self.config.callback_target()):
+    def run(self,request_data):
+        for target_list in self.param_process.main(request_data):
             #print(target_list)
             for target in target_list:
                 start = time.time()

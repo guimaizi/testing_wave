@@ -18,8 +18,8 @@ class filter_similarity:
         : 过滤数据库重复参数
         :return:
         '''
-        url_param=urlparse(data[0][0]['data']['url'])
-        url_api="%s://%s%s"%(url_param.scheme,url_param.netloc,url_param.path)
+        #print(data[0][0]['data']['url'])
+        url_api=self.config.callback_url_header(data[0][0]['data']['url'])
         if self.mongo_con.find_param(url_api)==0:return data
         is_true=list(self.mongo_con.callback_param_list(url_api)[0]['url_param_list'])
         callback_data=[]
@@ -30,13 +30,15 @@ class filter_similarity:
                 callback_data.append(tmp)
         #print(callback_data)
         return callback_data
-    def run_filter(self):
+    def null_param_filter(self,url):
+        return self.mongo_con.find_param(url)
+    def run_filter(self,request_data):
         '''
         : 去重 写入/更新数据库
         :return:
         '''
         param_fun= param_process.param_process(['a'])
-        data=param_fun.main(self.config.callback_target())
+        data=param_fun.main(request_data)
         if len(data)==0:return 0
         url_param=urlparse(data[0][0]['data']['url'])
         url_api="%s://%s%s"%(url_param.scheme,url_param.netloc,url_param.path)

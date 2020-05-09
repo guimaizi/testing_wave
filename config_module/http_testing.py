@@ -14,7 +14,7 @@ class http_testing:
         self.config_param= config_function.config_function()
     def http_get(self,data):
         try:
-            r=requests.get(data['url'],headers=data['headers'],timeout=self.config_param.time_out)
+            r=requests.get(data['url'],headers=data['headers'],timeout=self.config_param.callback_timeout())
             r.close()
             return r.text
         except:return 'null'
@@ -23,9 +23,9 @@ class http_testing:
             
             #proxies = { "http": "http://127.0.0.1:8080"}
             if type(data['post'])==type({'a':1}):
-                r=requests.post(data['url'],data=json.dumps(data['post']),headers=data['headers'],timeout=self.config_param.time_out)
+                r=requests.post(data['url'],data=json.dumps(data['post']),headers=data['headers'],timeout=self.config_param.callback_timeout())
             else:
-                r=requests.post(data['url'],data=str(data['post']),headers=data['headers'],timeout=self.config_param.time_out)
+                r=requests.post(data['url'],data=str(data['post']),headers=data['headers'],timeout=self.config_param.callback_timeout())
             r.close()
             #print(r.text)
             return r.text

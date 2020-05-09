@@ -6,15 +6,17 @@ Created on Nov 12, 2019
 '''
 
 import json
+from config_module import mongo_con
+from urllib.parse import urlparse
+
 class config_function:
     def __init__(self):
         main_path='G:/Code/testing_wave/config_module/config.json'
         with open(main_path,'r') as load_f:
             self.load_dict = json.load(load_f)
-        self.time_out=10
     def callback_target(self):
         '''
-        : 返回burp保存结果
+        : 返回测试目标
         :return:
         '''
         with open('G:/Code/testing_wave/tmp/burp_tmp.json', 'r') as f:
@@ -25,11 +27,25 @@ class config_function:
         : 返回burp保存结果
         :return:
         '''
-        with open('G:/Code/testing_wave/tmp/burp_tmp.json', 'r') as f:
+        with open('%s/tmp/burp_tmp.json'%self.callback_path(), 'r') as f:
             data = json.load(f)
         return data
+    def callback_proxy_request(self):
+        '''
+            : 返回mongodb保存结果
+            :return:
+        '''
+        mongo_cons=mongo_con.mongo_con()
+        if mongo_cons.find_request_count()>1:
+            print(mongo_cons.callback_request())
+            data=mongo_cons.callback_request()
+            mongo_cons.updete_request(mongo_cons.callback_request())
+    def callback_path(self):
+        return self.load_dict['path']
     def callback_mongo_config(self):
         return self.load_dict['mongo_config']
+    def callback_timeout(self):
+        return self.load_dict['timeout']
     def Generated_text(self,data):
         '''
         :保存扫描器结果
@@ -37,8 +53,9 @@ class config_function:
         :return:
         '''
         print(data)
-    def into_param_list(self):
-        pass
+    def callback_url_header(self,url):
+        url_param=urlparse(url)
+        return "%s://%s%s"%(url_param.scheme,url_param.netloc,url_param.path)
 if __name__ == '__main__':
     url='http://www.target.cn/zxft/20483.htm?dsdsa=dsadsa&dada=1&dsdada=3fdsf'
     payload='xsssguimaizi'
