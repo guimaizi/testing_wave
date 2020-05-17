@@ -115,19 +115,20 @@ class param_process:
         list_data=[]
         copy_data=copy.deepcopy(data)
         if data['method']==1:
-            url_tmp=parse.urlparse(data['url'])
+            url_tmp=parse.urlparse(copy_data['url'])
             if '=' in url_tmp.query:
-                list_data.extend(self.callback_get_param(data))
+                list_data.extend(self.callback_get_param(copy_data))
             try:
                 eval(copy_data['post'])
                 list_data.extend(self.callback_json_param(copy_data))
             except:
+                #print(self.callback_post_param(copy_data))
                 list_data.extend(self.callback_post_param(copy_data))
         elif data['method']==0:
-            if '?'  in data['url'] and '='  in data['url']:
-                list_data.extend(self.callback_get_param(data))
-            elif self.filter.null_param_filter(self.config.callback_url_header(data['url']))<1:
-                list_data.extend(data)
+            if '?'  in copy_data['url'] and '='  in copy_data['url']:
+                list_data.extend(self.callback_get_param(copy_data))
+            elif self.filter.null_param_filter(self.config.callback_url_header(copy_data['url']))<1:
+                list_data.extend(copy_data)
             else:list_data.extend([])
         if list_data!=[]:
             return self.filter.filter_param(list_data)

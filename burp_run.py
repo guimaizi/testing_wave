@@ -1,10 +1,5 @@
 # coding: utf-8
 '''
-    @Author guimaizi
-    @Date 5/1/2020 9:05
-'''
-# coding: utf-8
-'''
 Created on Nov 25, 2019
 
 @author: guimaizi
