@@ -1,1 +1,21 @@
-{"headers": {"Origin": "https://developers.e.qq.com", "Cookie": "skey=+; pgv_pvi=9089357824; pgv_si=s4536093696; _qpsvr_localtk=0.29306713220282155; ptui_loginuin=635713319; RK=kFzB4GGDdF; ptcz=3bb356bc06e4c46d202b0cf1fda4acec227397f09ee8fd009fe01139d4ccf6d6; gdt_token=TGT-20948-95HPGuHvODshasdfJQKqlE8S65qi5Q_cSgafDwasfhY8EXN9c5y44ghH_j1_H4N_; gdt_protect=52c4b28051b7812c6e49b7e536782e8b5a7c861c; masked_qq_number=635%2A%2A%2A319; pgv_pvid=1827553762; pgv_info=ssid=s8345519954", "Accept": "application/json, text/javascript, */*; q=0.01", "X-Requested-With": "XMLHttpRequest", "Connection": "close", "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4009.0 Safari/537.36", "Referer": "https://developers.e.qq.com/app/manage/1106831475", "Sec-Fetch-Site": "same-origin", "Sec-Fetch-Dest": "empty", "Accept-Encoding": "gzip, deflate", "Sec-Fetch-Mode": "cors", "Accept-Language": "zh-CN,zh;q=0.9", "Content-Length": "142", "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8"}, "method": 1, "url": "https://developers.e.qq.com:443/webservice/developer/get_call_stat", "post": "app_id=1106831475&time_slot=2&type=3&page=1&pagesize=5&date%5BA%5D%5Bstart_date%5D=20191230&date%5BA%5D%5Bend_date%5D=20200106&g_tk=1502703378"}
+{
+    "headers": {
+        "Origin": "https://developers.e.qq.com",
+        "Cookie": "skey=+; pgv_pvi=9089357824; pgv_si=s4536093696; _qpsvr_localtk=0.29306713220282155; ptui_loginuin=635713319; RK=kFzB4GGDdF; ptcz=3bb356bc06e4c46d202b0cf1fda4acec227397f09ee8fd009fe01139d4ccf6d6; gdt_token=TGT-20948-95HPGuHvODshasdfJQKqlE8S65qi5Q_cSgafDwasfhY8EXN9c5y44ghH_j1_H4N_; gdt_protect=52c4b28051b7812c6e49b7e536782e8b5a7c861c; masked_qq_number=635%2A%2A%2A319; pgv_pvid=1827553762; pgv_info=ssid=s8345519954",
+        "Accept": "application/json, text/javascript, */*; q=0.01",
+        "X-Requested-With": "XMLHttpRequest",
+        "Connection": "close",
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4009.0 Safari/537.36",
+        "Referer": "https://developers.e.qq.com/app/manage/1106831475",
+        "Sec-Fetch-Site": "same-origin",
+        "Sec-Fetch-Dest": "empty",
+        "Accept-Encoding": "gzip, deflate",
+        "Sec-Fetch-Mode": "cors",
+        "Accept-Language": "zh-CN,zh;q=0.9",
+        "Content-Length": "142",
+        "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8"
+    },
+    "method": 1,
+    "url": "https://developers.e.qq.com:443/webservice/developer/get_call_stat",
+    "post": "app_id=1106831475&time_slot=2&type=3&page=1&pagesize=5&date%5BA%5D%5Bstart_date%5D=20191230&date%5BA%5D%5Bend_date%5D=20200106&g_tk=1502703378"
+}
