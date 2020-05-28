@@ -111,6 +111,14 @@ class param_process:
                 list_param_payload.append(copy_data)
             list_data.append(list_param_payload)
         return list_data
+    def callback_null_param(self,data):
+        list_data=[]
+        for payload in self.payload_list:
+            copy_data=copy.deepcopy(data)
+            copy_data['url']=copy_data['url']+payload
+            list_data.append({"name_param":"Current_URL","data":copy_data})
+        return [list_data]
+
     def main(self,data):
         list_data=[]
         copy_data=copy.deepcopy(data)
@@ -126,9 +134,10 @@ class param_process:
                 list_data.extend(self.callback_post_param(copy_data))
         elif data['method']==0:
             if '?'  in copy_data['url'] and '='  in copy_data['url']:
+                #print(self.callback_get_param(copy_data))
                 list_data.extend(self.callback_get_param(copy_data))
             elif self.filter.null_param_filter(self.config.callback_url_header(copy_data['url']))<1:
-                list_data.extend(copy_data)
+                list_data.extend(self.callback_null_param(copy_data))
             else:list_data.extend([])
         if list_data!=[]:
             return self.filter.filter_param(list_data)

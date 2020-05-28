@@ -23,10 +23,6 @@ class xss_testing:
                     #print(html_text)
                     if '"GuImAizI' in html_text or '<GuImAizI>' in html_text:
                         self.config.Generated_text('XSS: %s\n %s'%(target['name_param'],target['data']))
-            request_data['url']=request_data['url']+self.payload[0]
-            html_text=self.http_testing.callback_response(request_data)
-            if '"GuImAizI' in html_text or '<GuImAizI>' in html_text:
-                self.config.Generated_text('XSS: %s\n '%(request_data['url']))
         except Exception as e:
             print(e)
 if __name__ == '__main__':

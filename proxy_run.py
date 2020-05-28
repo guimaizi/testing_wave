@@ -1,14 +1,3 @@
-# coding: utf-8
-'''
-    @Author guimaizi
-    @Date 5/1/2020 9:06
-'''
-# coding: utf-8
-'''
-    @Author guimaizi
-    @Date 5/1/2020 9:05
-'''
-# coding: utf-8
 '''
 Created on Nov 25, 2019
 
@@ -28,17 +17,27 @@ class proxy_run:
         '''
         try:
             mongo_cons=mongo_con.mongo_con()
-            if mongo_cons.find_request_count()>=1:
-                request_data=mongo_cons.callback_request()
-                #print(request_data)
-                xss=xss_testing.xss_testing()
-                xss.reflected_run(request_data)
-                sql_inj=sqlinj_testing.sqlinj_testing( )
-                sql_inj.run(request_data)
-                cmd_in=cmd_inj.cmd_inj()
-                cmd_in.run(request_data)
+            waf=waf_test.waf_test()
+            while 1:
+                try:
+                    request_data=mongo_cons.callback_request()
+                    if mongo_cons.find_request_count()>=1:
+                        if waf.run(mongo_cons.callback_request())!=0:
+                            sql_inj=sqlinj_testing.sqlinj_testing()
+                            sql_inj.run(mongo_cons.callback_request())
+                            cmd_in=cmd_inj.cmd_inj()
+                            cmd_in.run(mongo_cons.callback_request())
+                        xss=xss_testing.xss_testing()
+                        xss.reflected_run(mongo_cons.callback_request())
+                        filter=filter_similarity.filter_similarity()
+                        filter.run_filter(mongo_cons.callback_request())
+                    else:return 0
+                finally:
+                    mongo_cons.updete_request(request_data['_id'])
+        except Exception as e:
+            print(e)
         finally:
-            mongo_cons.updete_request(request_data['_id'])
+            print('\n-------------\nfinished')
     def main(self):
         pass
 if __name__ == '__main__':
