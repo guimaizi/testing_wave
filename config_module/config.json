@@ -1,0 +1,4 @@
+{"path":"G:/Code/testing_wave/",
+  "timeout":8,
+  "mongo_config":{"ip":"192.168.0.137","port":27017,"name":"","password":""}
+}

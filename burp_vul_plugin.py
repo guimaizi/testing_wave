@@ -1,6 +1,7 @@
 # coding: utf-8
 '''
 @author: guimaizi
+: burp插件
 '''
 from burp import IBurpExtender
 from burp import IContextMenuFactory
@@ -36,20 +37,21 @@ class BurpExtender(IBurpExtender,  IContextMenuFactory):
         json_strs={}
         for value in headers:
             strs=value.split(':',1)
-            if len(strs)>1 and strs[0] not in ['Host','GET','POST']:
+            #print strs
+            if len(strs)>1 and strs[0] not in ['Host','GET','POST'] and strs[0].startswith('GET')==False and strs[0].startswith('POST') ==False:
                 json_strs['%s'%strs[0]]=strs[1].lstrip()
         method=0
         if analyzedRequest.getMethod() == "POST":
             body = request.getRequest().tostring()[analyzedRequest.getBodyOffset():]
             method=1
         else:body='null'
-        path=r"G:/Code/testing_wave"
-        test_vul = "%s/main.py"%path        
-        data={"method":method,"url":str(url),"post":str(body),"headers":json_strs}
+        path=r"G:/Code/testing_wave/tmp/burp_tmp.json"
+        data={"method":method,"url":str(url),"post":body,"headers":json_strs}
         json_data=json.dumps(data)
-        print json_data
-        with open('%s/tmp.json'%path, 'w') as json_file:
+        #print json_data
+        #print 3333
+        with open('%s'%path, 'w') as json_file:
             json_file.write(json_data)
         #subprocess.call('python3 /Users/guimaizi/hack-tool/burp_lib/test_vul.py')
         #os.system('open -a Terminal.app /Users/guimaizi/eclipse-workspace/testing_wave/start.sh')
-        os.system('start cmd /k python G:/Code/testing_wave/main.py')
+        os.system('start cmd /k python G:/Code/testing_wave/burp_run.py')
