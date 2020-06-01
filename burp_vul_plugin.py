@@ -45,13 +45,13 @@ class BurpExtender(IBurpExtender,  IContextMenuFactory):
             body = request.getRequest().tostring()[analyzedRequest.getBodyOffset():]
             method=1
         else:body='null'
-        path=r"G:/Code/testing_wave/tmp/burp_tmp.json"
+        path=r"G:/Code/testing_wave"
         data={"method":method,"url":str(url),"post":body,"headers":json_strs}
         json_data=json.dumps(data)
         #print json_data
         #print 3333
-        with open('%s'%path, 'w') as json_file:
+        with open('%s/tmp/burp_tmp.json'%path, 'w') as json_file:
             json_file.write(json_data)
         #subprocess.call('python3 /Users/guimaizi/hack-tool/burp_lib/test_vul.py')
         #os.system('open -a Terminal.app /Users/guimaizi/eclipse-workspace/testing_wave/start.sh')
-        os.system('start cmd /k python G:/Code/testing_wave/burp_run.py')
+        os.system('start cmd /k python %s/burp_run.py'%path)
